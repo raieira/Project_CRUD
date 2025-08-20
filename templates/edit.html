@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %} Editar produtos * CRUD Flask {% enblock %}
+
+{% block content %}
+
+<h1 class="page-title">Editar Produto</h1>
+
+<div class="card">
+    <form method="post" class="form">
+        <div class="form_row">
+            <label for="form_label">Nome
+                <input 
+                class="form_input"
+                type="text"
+                name="nome"
+                value="{{ produto[nome] }}"
+                placeholder="EX: Teclado Mecanico"
+                required
+                />
+            </label>
+        </div>
+
+        <div class="form_actions">
+            <button class="btn btn--primary" type="submit">Salva Alteraçãos</button>
+            <a class="btn" href="{{ url_for('home') }}"></a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
