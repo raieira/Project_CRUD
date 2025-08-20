@@ -89,7 +89,7 @@ def edit_product(id):
             conn.commit()
             flash("produto atualizado com sucesso!", "success")
 
-        except exception:
+        except Exception:
             flash("Erro ao atualizar. verifique os dados,", "error")
 
         conn.close()
@@ -99,8 +99,23 @@ def edit_product(id):
     conn.close()
     return render_template("edit.html", produto=produto)
 
-
-
+@app.route("/delete/<int:id>", methods=["POST", "GET"])
+def delete_product(id):
+    conn = get_db_connection()
+    produto = conn.execute("SELECT * FROM produtos WHERE id = ?",(id,)).fetchone()
+    
+    if not produto:
+        flash("Produto não encontrado!", "error")
+        return redirect(url_for("home"))
+    
+    if request.method == "POST":
+        conn.execute("DELETE FROM produtos WHERE is = ?",(id,))
+        conn.commit()
+        conn.close()
+        flash("Produto excluido com sucesso!", "success")
+        return redirect(url_for("home"))
+    conn.close()
+    return render_template("delete.html", produto=produto)
 
 
 if __name__ == "__main__":
