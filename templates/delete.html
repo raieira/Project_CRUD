@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} Editar produtos * CRUD Flask {% enblock %}
+
+{% block content %}
+
+<h1 class="page-title">Excluir Produto</h1>
+
+<div class="card">
+    <p>
+        Tem certeza que deseja excluir o produto
+        <strong>{{produto['nome']}}</strong>?
+    </p>
+    <form method="post">
+        <button class="btn btn--danger" type="submit">Sim, excluir</button>
+        <a class="btn" href="{{url_for('home')}}">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}
